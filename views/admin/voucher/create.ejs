@@ -1,0 +1,116 @@
+<%- include ('../../partials/header.ejs') %> <%- include
+('../../partials/navbar.ejs') %> <%- include ('../../partials/sidebar.ejs') %>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>voucher</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/voucher">voucher</a></li>
+            <li class="breadcrumb-item active">Tambah voucher</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-primary">
+              <h3 class="card-title">
+                <strong class="text-white">Form voucher</strong>
+              </h3>
+            </div>
+            <!-- /.card-header -->
+            <form method="post" action="/voucher/create" enctype="multipart/form-data">
+              <div class="card-body">
+                  <div class="form-group">
+                    <label for="name">Nama game</label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Nama game"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="category">Kategori</label>
+                    <select name="category" class="form-control select2bs4" id="">
+                      <option value="">-- kategori --</option>
+                      <% category.map((v,i) => { %>
+                      <option value="<%- v._id %>"><%- v.name %></option>
+                      <% }) %>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="nominals">Nominal</label>
+                    <select
+                      name="nominals"
+                      class="form-control select2bs4"
+                      id=""
+                      multiple="multiple"
+                      data-placeholder="Pilih nominal"
+                    >
+                      <option value="">-- nominal --</option>
+                      <% nominal.map((v,i) => { %>
+                      <option value="<%- v._id %>">
+                        <%- v.coinName %> <%- v.price %>
+                      </option>
+                      <% }) %>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="thumbnail">Gambar</label>
+                    <input type="file" name="thumbnail" id="thumbnail" class="form-control">
+                    <img src="" alt="" id="preview">
+                  </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<%- include ('../../partials/footer.ejs') %> <%- include
+('../../partials/js.ejs') %>
+
+<script>
+  function readUrl(input){
+    if(input.files && input.files[0]){
+      const reader = new FileReader();
+
+      reader.onload = function(e){
+        $('#preview').attr('src', e.target.result);
+        $('#preview').attr('width', '20%');
+        $('#preview').attr('height', '20%');
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $('#thumbnail').change(function(){
+    readUrl(this);
+  })
+
+</script>
