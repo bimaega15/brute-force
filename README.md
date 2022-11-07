@@ -1,4 +1,3 @@
 # brute-force
-# My name: Bima Ega Farizky
-# Job: Full stack developer
+Developer by: Bima Ega (Fullstack developer)
 Aplikasi react native algoritma brute forcce
